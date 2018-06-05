@@ -133,7 +133,10 @@ int x;
     
 
     private void swap(int i, int j) {
-        currentmap[i][j] = !currentmap[i][j];
+        try {
+            currentmap[i][j] = !currentmap[i][j];
+        } catch (IndexOutOfBoundsException e) {
+        }
     }
 	
 	public static boolean[][] createArray(){

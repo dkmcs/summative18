@@ -74,10 +74,10 @@ int x;
     public void updateScreen(){
 		for (int i = 0; i < btn.length; i++ ) 
 			for (int j = 0; j < btn[0].length; j++ ) 
-				if (currentmap[x][j])
-					btn[x][j].setIcon(moon);
+				if (currentmap[i][j])
+					btn[i][j].setIcon(moon);
 				else 
-					btn[x][j].setIcon(star);
+					btn[i][j].setIcon(star);
     }
    
     public void actionPerformed( ActionEvent e ){ 
@@ -116,17 +116,13 @@ int x;
 					if (b.getText().equals(i+" " +j)){  //if gray - change to red
 						if(currentmap[i][j] == currentmap[var1][var2]){
 							currentmap[i][j]=!currentmap[i][j];
-							if(currentmap[i][j]){
-								b.setIcon(moon);
-							}
-							else{
-								b.setIcon(star);
-							}
-							if(i > 0 && currentmap[i-1][j])
-								currentmap[i-1][j]=false;
-							else if (i > 0 && !(currentmap[i-1][j]))
-								currentmap[i-1][j]=true;
-							x=i-1;
+
+                            swap(i, j);
+                            swap(i-1, j);
+                            swap(i+1, j);
+                            swap(i, j+1);
+                            swap(i, j-1);
+                            updateScreen();
 						}
 					}
 				}
@@ -134,6 +130,11 @@ int x;
 		}		
 	}// end actionPerformed	
 		//gotta put smth saying if all blocks are one kind of block, then finish the game with a message saying "you won! play again?"
+    
+
+    private void swap(int i, int j) {
+        currentmap[i][j] = !currentmap[i][j];
+    }
 	
 	public static boolean[][] createArray(){
 	boolean[][] arr = new boolean[5][5];

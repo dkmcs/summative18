@@ -9,9 +9,9 @@ public class Square_Up extends JFrame implements ActionListener {
    private Container c;
    private JPanel btnPanel = new JPanel();
    private JPanel southPanel = new JPanel();
-   private JButton fillRed = new JButton("New Game");     //can change aaaa   label on action buttons
-   private JButton count = new JButton("How to Play");      //can change bbbb   label on action buttons
-   private JButton clear = new JButton("Exit");          //label on action buttons
+   private JButton fillRed = new JButton("New Game");     //New Game button
+   private JButton count = new JButton("How to Play");      //Instructions button
+   private JButton clear = new JButton("Exit");          //Exit button
 //----------------------------------variables
 
 
@@ -29,7 +29,7 @@ int x;
       super( "Square Up" );
 
       btnPanel.setLayout(new GridLayout(btn.length,btn[0].length));
-	  southPanel.setLayout(new GridLayout(1,3));
+	  southPanel.setLayout(new GridLayout(1,3));//layout for bottom 3 buttons(new game, instruct., exit)
 
       c = getContentPane();
       c.setLayout( new BorderLayout() );
@@ -39,7 +39,7 @@ int x;
 	if(rand2==1){
 		for (int i = 0; i < btn.length; i++ ) {
 			for (int j = 0; j < btn[0].length; j++ ) {
-				btn[i][j] = new JButton(i+" " +j); //can change c   label on grid buttons
+				btn[i][j] = new JButton(i+" " +j); 
 				if(currentmap[i][j])
 					btn[i][j].setIcon(moon);
 				else
@@ -49,7 +49,7 @@ int x;
 				btn[i][j].setActionCommand(i+" " +j);
 			}  
 		}
-		updateScreen();
+		updateScreen();//method to change the playing screen
 	}
 	fillRed.addActionListener( this );
 	southPanel.add(fillRed);
@@ -71,6 +71,7 @@ int x;
 	  
 	  //===-------------------------------
     }
+    //method to change playing screen 
     public void updateScreen(){
 		for (int i = 0; i < btn.length; i++ ) 
 			for (int j = 0; j < btn[0].length; j++ ) 
@@ -79,21 +80,23 @@ int x;
 				else 
 					btn[i][j].setIcon(star);
     }
-   
+   //method to press on buttons and execute their functions
     public void actionPerformed( ActionEvent e ){ 
         
 		JButton b = (JButton)e.getSource();     // now b is the button we clicked on
-				   
+		//new game button		
 		if (b.getText().equals("New Game")){ // NEW GAME
 			updateScreen();
 		}
+	    	//instructions button
 		else if (b.getText().equals("How to Play")){ // HOW TO PLAY
 		    JOptionPane.showMessageDialog( null, "The mission is to get all of the lights off! Clicking on a lightbulb will change itself and the bulbs directly above, below, and beside it. Good luck!", "How to Play:", JOptionPane.INFORMATION_MESSAGE );
 		}
+	    	//exit button
 		else if (b.getText().equals("Exit")){ //EXIT
 		    System.exit(0);
 		}
-		else{ //ALL THE OTHER BUTTONS
+		else{ //ALL THE OTHER BUTTONS (game buttons)
 			txt = b.getActionCommand();
 			System.out.println(txt);
 			len = txt.length();
@@ -111,12 +114,13 @@ int x;
 						up2 = new JButton();
 				}
 			}
+			//changing the clicked upon button
 			for (int i = 0; i < btn.length; i++ ) {
 				for (int j = 0; j < btn[0].length; j++ ) {
 					if (b.getText().equals(i+" " +j)){  //if gray - change to red
 						if(currentmap[i][j] == currentmap[var1][var2]){
 							currentmap[i][j]=!currentmap[i][j];
-
+			    //changing buttons beside, below, and above the clicked upon button 
                             swap(i, j);
                             swap(i-1, j);
                             swap(i+1, j);

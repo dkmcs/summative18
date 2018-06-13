@@ -12,10 +12,10 @@ public class Face_Off extends JFrame implements ActionListener {
     private Container c;
     private JPanel btnPanel = new JPanel();
     private JPanel southPanel = new JPanel();
-    private JButton fillRed = new JButton("New Game");     //can change aaaa   label on action buttons
-    private JButton count = new JButton("How to Play");      //can change bbbb   label on action buttons
+    private JButton fillRed = new JButton("New Game");     //setup for New Game button
+    private JButton count = new JButton("How to Play");      //setup for instructions button
     private JButton change = new JButton("Change Buttons");
-    private JButton clear = new JButton("Exit");          //label on action buttons
+    private JButton clear = new JButton("Exit");          //setup for Exit button
 //----------------------------------variables
 String fold = "img1";
 ImageIcon hussain= new ImageIcon(fold+"\\block1.png");
@@ -69,7 +69,7 @@ boolean win = false;
 	setSize( 600, 600 );                          //size of the window, can be changed
 	setVisible(true);
     }
-   
+   // method for clicking buttons and executing their functions
     public void actionPerformed( ActionEvent e ){ 
         
 		JButton b = (JButton)e.getSource();     // now b is the button we clicked on
@@ -81,7 +81,7 @@ boolean win = false;
 		else if (b.getText().equals("How to Play")){ // HOW TO PLAY
 		    JOptionPane.showMessageDialog( null, "The mission is to get all of the faces the same! Clicking on a face will change itself and the faces directly above, below, and beside it. Good luck!", "How to Play:", JOptionPane.INFORMATION_MESSAGE );
 		}
-		else if (b.getText().equals("Change Buttons")){ //CHAGNE BUTTONS
+		else if (b.getText().equals("Change Buttons")){ //CHANGE BUTTONS
 			if(fold.equals("img1"))
 				fold = "img2";
 			else if(fold.equals("img2"))
@@ -95,7 +95,7 @@ boolean win = false;
 		else if (b.getText().equals("Exit")){ //EXIT
 		    System.exit(0);
 		}
-		else{ //ALL THE OTHER BUTTONS
+		else{ //ALL THE OTHER BUTTONS (game buttons)
 			txt = b.getActionCommand();
 			len = txt.length();
 			String last = txt.substring(len-1);
@@ -104,19 +104,20 @@ boolean win = false;
 			int var2 = Integer.parseInt(last);
 			for (int i = 0; i < btn.length; i++ ) {
 				for (int j = 0; j < btn[0].length; j++ ) {
-					if (b.getActionCommand().equals(i+" " +j)){  //if gray - change to red
+					if (b.getActionCommand().equals(i+" " +j)){ 
 						if(currentmap[i][j] == currentmap[var1][var2]){
+			    //changing clicked upon button & buttons above, below, & beside it
                             swap(i, j);
                             swap(i-1, j);
                             swap(i+1, j);
                             swap(i, j+1);
                             swap(i, j-1);
-                            updateScreen();
+                            updateScreen(); //method to change playing screen
 						}
 					}
 				}
 			}
-			//Let win represent boolean to check board
+			//win represents boolean to check board
 			win = true;
 			boolean cur = currentmap[0][0];
 			for (int i = 0; i < btn.length; i++ ) {
@@ -127,6 +128,7 @@ boolean win = false;
 					}
 				}
 			} 
+			//Win-Screen
 			if(win){
 				JOptionPane.showMessageDialog( null, "You Won!!", "Congratulations!!", JOptionPane.INFORMATION_MESSAGE);
 				currentmap = newArray();
@@ -135,7 +137,8 @@ boolean win = false;
 		
 		}		
 	}// end actionPerformed	
-    
+	
+    	//method to change playing screen
 	public void updateScreen(){
 		for (int i = 0; i < btn.length; i++ ) 
 			for (int j = 0; j < btn[0].length; j++ ) 
@@ -144,7 +147,7 @@ boolean win = false;
 				else 
 					btn[i][j].setIcon(youjin);
     }
-	
+	//method to create random game screen
 	public boolean[][] newArray(){
 	boolean[][] arr = new boolean[5][5];
 	int rand = 0;
@@ -188,6 +191,7 @@ boolean win = false;
 	return arr;
 	}*/
 	
+	//method to create another random array, replacing previous one
 	public static boolean[][] createArray(){
 	boolean[][] arr = new boolean[5][5];
     for(int i = 0; i < arr.length; i++){

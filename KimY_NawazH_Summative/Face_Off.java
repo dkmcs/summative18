@@ -14,7 +14,7 @@ public class Face_Off extends JFrame implements ActionListener {
     private JPanel southPanel = new JPanel();
     private JButton fillRed = new JButton("New Game");     //can change aaaa   label on action buttons
     private JButton count = new JButton("How to Play");      //can change bbbb   label on action buttons
-	private JButton change = new JButton("Change Buttons");
+    private JButton change = new JButton("Change Buttons");
     private JButton clear = new JButton("Exit");          //label on action buttons
 //----------------------------------variables
 String fold = "img1";
@@ -63,8 +63,6 @@ boolean win = false;
 	southPanel.add(clear);
 	change.addActionListener( this );
 	southPanel.add(change);
-	difficulty.addActionListener( this );
-	southPanel.add(difficulty);
 	
 	c.add( southPanel, BorderLayout.SOUTH );
 	c.add( btnPanel, BorderLayout.CENTER  );
